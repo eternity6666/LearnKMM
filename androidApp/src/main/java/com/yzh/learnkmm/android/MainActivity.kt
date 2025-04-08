@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.yzh.learnkmm.Greeting
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -43,7 +45,10 @@ class MainActivity : ComponentActivity() {
                                 Text("请求")
                             }
                         } else {
-                            Text(data)
+                            Text(
+                                data,
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                     }
                 }
@@ -52,7 +57,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun requestData() {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             greeting.request()
         }
     }

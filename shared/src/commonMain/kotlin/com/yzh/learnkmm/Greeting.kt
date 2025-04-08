@@ -22,6 +22,6 @@ class Greeting {
         val response = client.get("https://api.doctorxiong.club/v1/fund/detail/list?code=000001") {
             method = HttpMethod.Get
         }
-        _data.emit(response.body())
+        _data.emit(response.body<String>().substring(startIndex = 0, endIndex = 100))
     }
 }
